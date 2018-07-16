@@ -1,0 +1,62 @@
+// Copyright 2018 Bitwise IO
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// -----------------------------------------------------------------------------
+
+syntax = "proto3";
+
+message Quote {
+    enum Status {
+        OPEN = 0;
+        CLOSED = 1;
+    }
+
+    // UUID of the quote.
+    string quote_id = 1;
+
+    // Ticker symbol of the organization the quote is on bahalf of.
+    string organization = 2;
+
+    // ID of the bond the quote is for.
+    string bond_id = 3;
+
+    // Minimum price for which the firm is willing to sell the bond.
+    // Format: Millionths of dollars
+    uint64 ask_price = 4;
+
+    // Maximum quantity the firm is willing to sell.
+    uint64 ask_qty = 5;
+
+    // Maximum price for which the firm is willing to sell the bond.
+    // Format: Millionths of dollars
+    uint64 bid_price = 6;
+
+    // Minimum quantity the firm is willing to sell.
+    uint64 bid_qty = 7;
+
+    // Whether the quote is OPEN or CLOSED. Quotes are OPEN if they have
+    // sufficient remaining buy and sell quantities and have not been
+    // explicitly cancelled. Quotes move to CLOSED status if they can no
+    // longer fulfill a round-lot order (buy or sell quantity < 100000) or if
+    // they are explicitly cancelled by an authorized member of the firm
+    // associated with the quote.
+    Status status = 8;
+
+    // Time that the quote is created in relation to the current clock
+    // Format: UTC Timestamp
+    uint64 timestamp = 9;
+}
+
+message QuoteContainer {
+    repeated Quote entries = 1;
+}

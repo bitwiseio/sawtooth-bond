@@ -1,0 +1,108 @@
+// Copyright 2018 Bitwise IO
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// -----------------------------------------------------------------------------
+
+syntax = "proto3";
+
+message Organization {
+    enum OrganizationType {
+        TRADING_FIRM = 0;
+        PRICING_SOURCE = 1;
+    }
+
+    message Holding {
+        enum AssetType {
+            CURRENCY = 0;
+            BOND = 1;
+        }
+
+        // Whether the asset is CURRENCY or a BOND
+        AssetType asset_type = 1;
+
+        // If asset_type is BOND, the asset_id will contain the bond_id. If
+        // asset_type is CURRENCY, this will be the string ‘USD’.
+        string asset_id = 2;
+
+        // The current balance of the holding.
+        // Format: Millionths of dollars, or quantity of bonds
+        uint64 amount = 3;
+    }
+
+    message Authorization {
+        enum Role {
+            MARKETMAKER = 0;
+            TRADER = 1;
+        }
+
+        // Public key of a participant.
+        string public_key = 1;
+
+        // Whether the participant is a MARKETMAKER or TRADER.
+        Role role = 2;
+    }
+
+    message Receipt {
+        enum PaymentType {
+            COUPON = 0;
+            REDEMPTION = 1;
+        }
+
+        // ID of the bond for which this payment occurred.
+        string bond_id = 1;
+
+        // Whether it was a coupon or redemption payment.
+        PaymentType payment_type = 2;
+
+        // Date the coupon became due. Required if payment_type is COUPON.
+        // Format: UTC Timestamp
+        uint64 coupon_date = 3;
+
+        // Amount received.
+        // Format: Millionths of dollars
+        uint64 amount = 4;
+
+        // Time that the receipt is created in relation to the current clock.
+        // Format: UTC Timestamp
+        uint64 timestamp = 5;
+    }
+
+    // Ticker symbol associated with the organization.
+    string organization_id = 1;
+
+    // Name of the organization.
+    string name = 2;
+
+    // Type of the organization.
+    OrganizationType organization_type = 3;
+
+    // Industry of the organization.
+    string industry = 4;
+
+    // List of the assets that the organization owns.
+    repeated Holding holdings = 5;
+
+    // Four-letter code representing the identity of the organization for
+    // the purpose of providing quotes to the market.
+    string pricing_source = 6;
+
+    // List of participant public keys and their roles within the organization.
+    repeated Authorization authorizations = 7;
+
+    // List of coupon and redemption receipts.
+    repeated Receipt receipts = 8;
+}
+
+message OrganizationContainer {
+    repeated Organization entries = 1;
+}

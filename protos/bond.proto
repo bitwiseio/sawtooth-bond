@@ -1,0 +1,77 @@
+// Copyright 2018 Bitwise IO
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// -----------------------------------------------------------------------------
+
+syntax = "proto3";
+
+message Bond {
+    enum CouponType {
+        FIXED = 0;
+        FLOATING = 1;
+    }
+
+    enum CouponFrequency {
+       QUARTERLY = 0;
+       MONTHLY = 1;
+       DAILY = 2;
+    }
+
+    message CorporateDebtRating {
+       string agency = 1;
+       string rating = 2;
+    }
+
+    // Identifier of the bond (ISIN).
+    string bond_id = 1;
+
+    // Ticker symbol of the organization which issued the bond.
+    string issuing_organization_id = 2;
+
+    // List of bond ratings by agency.
+    repeated CorporateDebtRating corporate_debt_ratings = 3;
+
+    // The yearly rate of interest paid in coupons.
+    // Format: Thousandths of percents
+    uint64 coupon_rate = 4;
+
+    // If floating, the interest rate is calculated by adding coupon-rate
+    // to the rate looked up using the benchmark index (Libor).
+    CouponType coupon_type = 5;
+
+    // How often the coupons are paid out.
+    CouponFrequency coupon_frequency = 6;
+
+    // Date the first coupon can be paid for the bond.
+    // Format: UTC Timestamp
+    uint64 first_coupon_date = 7;
+
+    // Date on which the bond becomes worth it’s face value and can be redeemed.
+    // Format: UTC Timestamp
+    uint64 maturity_date = 8;
+
+    // Quantity of bonds.
+    uint64 amount_outstanding = 9;
+
+    // Par-value of the bond, to be paid upon maturity.
+    // Format: Millionths of dollars
+    uint64 face_value = 10;
+
+    // Date on which the bond was first settled.
+    // Format: UTC Timestamp
+    uint64 first_settlement_date = 11;
+}
+
+message BondContainer {
+    repeated Bond entries = 1;
+}
