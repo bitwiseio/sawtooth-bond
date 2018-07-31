@@ -31,6 +31,26 @@ services:
         cargo build
       "
 
+  bond-rest-api:
+    image: bond-rest-api
+    container_name: bond-rest-api
+    build:
+      context: .
+      dockerfile: ./rest_api/Dockerfile
+    volumes:
+      - '.:/project/sawtooth-bond'
+    ports:
+      - '8000:8000'
+    environment:
+      ROCKET_ADDRESS: "0.0.0.0"
+      ROCKET_PORT: "8000"
+    command: |
+      bash -c "
+        cd rest_api
+        cargo build
+        bond-rest-api
+      "
+
   postgres:
     image: postgres:alpine
     container_name: bond-postgres
