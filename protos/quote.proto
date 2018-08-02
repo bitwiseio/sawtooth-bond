@@ -24,9 +24,9 @@ message Quote {
     // UUID of the quote.
     string quote_id = 1;
 
-    // Ticker symbol or pricing source of the 
+    // Ticker symbol or pricing source of the
     // organization the quote is on behalf of.
-    string organization = 2;
+    string organization_id = 2;
 
     // ID of the bond the quote is for.
     string bond_id = 3;
