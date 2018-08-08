@@ -13,15 +13,14 @@
 // limitations under the License.
 
 use errors::ApiError;
-use rocket::http::RawStr;
 use rocket_contrib::{Json, Value};
 
-#[get("/quotes")]
-pub fn list_quotes() -> Result<Json<Value>, ApiError> {
+#[post("/batches")]
+pub fn submit_batches() -> Result<Json<Value>, ApiError> {
     Err(ApiError::NotImplemented)
 }
 
-#[get("/quotes/<_quote_id>")]
-pub fn retrieve_quote(_quote_id: &RawStr) -> Result<Json<Value>, ApiError> {
+#[get("/batch_statuses")]
+pub fn list_batch_statuses() -> Result<Json<Value>, ApiError> {
     Err(ApiError::NotImplemented)
 }

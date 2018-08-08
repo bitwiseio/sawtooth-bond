@@ -16,27 +16,12 @@ use errors::ApiError;
 use rocket::http::RawStr;
 use rocket_contrib::{Json, Value};
 
-#[post("/organizations")]
-pub fn create_organization() -> Result<Json<Value>, ApiError> {
-    Err(ApiError::NotImplemented)
-}
-
 #[get("/organizations")]
 pub fn list_organizations() -> Result<Json<Value>, ApiError> {
     Err(ApiError::NotImplemented)
 }
 
-#[post("/organizations/<_organization_id>")]
-pub fn update_organization(_organization_id: &RawStr) -> Result<Json<Value>, ApiError> {
-    Err(ApiError::NotImplemented)
-}
-
 #[get("/organizations/<_organization_id>")]
 pub fn retrieve_organization(_organization_id: &RawStr) -> Result<Json<Value>, ApiError> {
-    Err(ApiError::NotImplemented)
-}
-
-#[post("/organizations/<_organization_id>/auth")]
-pub fn update_organization_auth(_organization_id: &RawStr) -> Result<Json<Value>, ApiError> {
     Err(ApiError::NotImplemented)
 }

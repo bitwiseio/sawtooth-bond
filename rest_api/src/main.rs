@@ -25,7 +25,9 @@ extern crate rocket_contrib;
 mod errors;
 mod route_handlers;
 
-use route_handlers::{bonds, holdings, orders, organizations, participants, quotes, settlements};
+use route_handlers::{
+    auth, blockchain, bonds, orders, organizations, participants, quotes, settlements,
+};
 
 fn main() {
     rocket::ignite()
@@ -33,28 +35,20 @@ fn main() {
         .mount(
             "/",
             routes![
-                bonds::create_bond,
+                auth::log_in,
+                auth::sign_up,
+                blockchain::submit_batches,
+                blockchain::list_batch_statuses,
                 bonds::list_bonds,
                 bonds::retrieve_bond,
-                holdings::create_holding,
-                holdings::delete_holding,
-                participants::login,
-                organizations::create_organization,
                 organizations::list_organizations,
-                organizations::update_organization,
                 organizations::retrieve_organization,
-                organizations::update_organization_auth,
-                participants::create_participant,
                 participants::list_participants,
-                participants::update_participant,
                 participants::retrieve_participant,
-                quotes::create_quote,
                 quotes::list_quotes,
                 quotes::retrieve_quote,
-                orders::create_order,
                 orders::list_orders,
                 orders::retrieve_order,
-                settlements::create_settlement,
                 settlements::list_settlements
             ],
         )

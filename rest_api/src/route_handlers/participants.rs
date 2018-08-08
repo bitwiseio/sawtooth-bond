@@ -16,23 +16,8 @@ use errors::ApiError;
 use rocket::http::RawStr;
 use rocket_contrib::{Json, Value};
 
-#[post("/login")]
-pub fn login() -> Result<Json<Value>, ApiError> {
-    Err(ApiError::NotImplemented)
-}
-
-#[post("/participants")]
-pub fn create_participant() -> Result<Json<Value>, ApiError> {
-    Err(ApiError::NotImplemented)
-}
-
 #[get("/participants")]
 pub fn list_participants() -> Result<Json<Value>, ApiError> {
-    Err(ApiError::NotImplemented)
-}
-
-#[post("/participants/<_public_key>")]
-pub fn update_participant(_public_key: &RawStr) -> Result<Json<Value>, ApiError> {
     Err(ApiError::NotImplemented)
 }
 

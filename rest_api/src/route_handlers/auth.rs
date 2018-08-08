@@ -13,15 +13,14 @@
 // limitations under the License.
 
 use errors::ApiError;
-use rocket::http::RawStr;
 use rocket_contrib::{Json, Value};
 
-#[post("/holdings")]
-pub fn create_holding() -> Result<Json<Value>, ApiError> {
+#[post("/login")]
+pub fn log_in() -> Result<Json<Value>, ApiError> {
     Err(ApiError::NotImplemented)
 }
 
-#[delete("/holdings/<_asset_id>")]
-pub fn delete_holding(_asset_id: &RawStr) -> Result<Json<Value>, ApiError> {
+#[post("/signup")]
+pub fn sign_up() -> Result<Json<Value>, ApiError> {
     Err(ApiError::NotImplemented)
 }

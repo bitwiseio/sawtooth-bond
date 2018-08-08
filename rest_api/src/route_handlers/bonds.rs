@@ -16,11 +16,6 @@ use errors::ApiError;
 use rocket::http::RawStr;
 use rocket_contrib::{Json, Value};
 
-#[post("/bonds")]
-pub fn create_bond() -> Result<Json<Value>, ApiError> {
-    Err(ApiError::NotImplemented)
-}
-
 #[get("/bonds")]
 pub fn list_bonds() -> Result<Json<Value>, ApiError> {
     Err(ApiError::NotImplemented)

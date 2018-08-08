@@ -15,11 +15,6 @@
 use errors::ApiError;
 use rocket_contrib::{Json, Value};
 
-#[post("/settlements")]
-pub fn create_settlement() -> Result<Json<Value>, ApiError> {
-    Err(ApiError::NotImplemented)
-}
-
 #[get("/settlements")]
 pub fn list_settlements() -> Result<Json<Value>, ApiError> {
     Err(ApiError::NotImplemented)
