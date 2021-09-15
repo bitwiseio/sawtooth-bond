@@ -20,6 +20,7 @@ authors = ["Bitwise IO"]
 [dependencies]
 bond-common = { path = "../common"}
 sawtooth_sdk = { git = "https://github.com/hyperledger/sawtooth-core.git" }
+protobuf = "2.0"
 rustc-serialize = "0.3.22"
 clap = "2" 
 log = "0.3.0"

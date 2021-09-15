@@ -19,6 +19,7 @@ extern crate clap;
 #[macro_use]
 extern crate log;
 extern crate log4rs;
+extern crate protobuf;
 extern crate rustc_serialize;
 extern crate sawtooth_sdk;
 
@@ -31,6 +32,8 @@ use sawtooth_sdk::processor::TransactionProcessor;
 use std::process;
 
 mod handler;
+mod payload;
+mod state;
 
 fn main() {
     let matches = clap_app!(bond =>
@@ -40,7 +43,7 @@ fn main() {
          "connection endpoint for validator")
         (@arg verbose: -v --verbose +multiple
          "increase output verbosity"))
-        .get_matches();
+    .get_matches();
 
     let endpoint = matches
         .value_of("connect")
