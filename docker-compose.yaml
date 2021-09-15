@@ -17,6 +17,22 @@ version: '2.1'
 
 services:
 
+  bond-cli:
+    image: bond-cli
+    container_name: bond-cli
+    build:
+      context: .
+      dockerfile: ./cli/Dockerfile
+    volumes:
+      - '.:/project/sawtooth-bond'
+    command: |
+      bash -c "
+        cd cli
+        cargo build
+        bond-cli init --url bond-rest-api:8000
+        tail -f /dev/null
+      "
+
   bond-processor:
     image: bond-processor
     container_name: bond-processor
